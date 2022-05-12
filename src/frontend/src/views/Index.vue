@@ -70,7 +70,7 @@
                     type="radio"
                     name="sauce"
                     :value="sauce.name === 'Томатный' ? 'tomato' : 'creamy'"
-                    :checked="sauce.id === 1 && true"
+                    :checked="sauce.id === 1"
                   />
                   <span>{{ sauce.name }}</span>
                 </label>
