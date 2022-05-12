@@ -13,13 +13,13 @@
                 v-for="dough in pizza.dough"
                 :key="dough.id"
                 class="dough__input"
-                :class="'dough__input--' + isLight(dough.image)"
+                :class="'dough__input--' + checkDoughSize(dough.image)"
               >
                 <input
                   type="radio"
                   name="dought"
                   class="visually-hidden"
-                  :value="isLight(dough.image)"
+                  :value="checkDoughSize(dough.image)"
                 />
                 <b>{{ dough.name }}</b>
                 <span>{{ dough.description }}</span>
@@ -36,13 +36,13 @@
               <label
                 v-for="size in pizza.sizes"
                 class="diameter__input"
-                :class="'diameter__input--' + checkPizzaSize(size.multiplier)"
+                :class="'diameter__input--' + getPizzaSize(size.multiplier)"
                 :key="size.id"
               >
                 <input
                   type="radio"
                   name="diameter"
-                  :value="checkPizzaSize(size.multiplier)"
+                  :value="getPizzaSize(size.multiplier)"
                   class="visually-hidden"
                 />
                 <span>{{ size.name }}</span>
@@ -161,22 +161,24 @@ export default {
       misc,
       pizza,
       user,
-      isLight: (item) => (item.includes("light") ? "light" : "large"),
-      checkPizzaSize(item) {
-        if (item === 1) {
-          return "small";
-        } else if (item === 2) {
-          return "normal";
-        } else {
-          return "big";
-        }
-      },
-      getName(item) {
-        const dot = item.indexOf(".");
-        const lastSlash = item.lastIndexOf("/");
-        return item.substring(lastSlash + 1, dot);
-      },
     };
+  },
+  methods: {
+    checkDoughSize: (item) => (item.includes("light") ? "light" : "large"),
+    getPizzaSize(item) {
+      if (item === 1) {
+        return "small";
+      } else if (item === 2) {
+        return "normal";
+      } else {
+        return "big";
+      }
+    },
+    getName(item) {
+      const dot = item.indexOf(".");
+      const lastSlash = item.lastIndexOf("/");
+      return item.substring(lastSlash + 1, dot);
+    },
   },
 };
 </script>
